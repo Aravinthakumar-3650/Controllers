@@ -8,7 +8,7 @@ void write_data(char);
 void write_string(char *);
 
 #define LCD_WIDTH 16
-#define L1 "WELCOME TO"
+#define L1 "Welcome to"
 #define L1_LEN 10
 
 void write_substring(char *str, int start)
