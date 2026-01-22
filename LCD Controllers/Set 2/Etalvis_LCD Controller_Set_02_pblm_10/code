@@ -7,10 +7,10 @@ void init_lcd(void);
 void write_data(char);
 
 #define LCD_WIDTH 16
-#define L1 "WELCOME"
-#define L2 "TO ETALVIS"
-#define L1_LEN 7
-#define L2_LEN 10
+#define L1 "Welcome to"
+#define L2 "ETALVIS"
+#define L1_LEN 10
+#define L2_LEN 7
 
 void write_substring(char *str, int start)
 {
