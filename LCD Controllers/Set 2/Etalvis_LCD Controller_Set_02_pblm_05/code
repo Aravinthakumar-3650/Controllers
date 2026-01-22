@@ -27,7 +27,7 @@ void setup()
     init_lcd();
     outdata(0x83);               
     lcd_control_write();
-    write_string("WELCOME TO");
+    write_string("Welcome to");
 
     while (1)
     {
