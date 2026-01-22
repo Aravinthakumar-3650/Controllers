@@ -22,7 +22,7 @@ void setup()
 
         outdata(0xCF);         
         lcd_control_write();
-        write_string("Etalvis");
+        write_string("ETALVIS");
 
         for (i = 0; i < 16 + 7; i++)   
         {
