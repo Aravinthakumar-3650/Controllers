@@ -8,10 +8,10 @@ void write_data(char);
 void write_string(char *);
 
 #define LCD_WIDTH 16
-#define L1 "WELCOME"
-#define L2 "TO ETALVIS"
-#define L1_LEN 7
-#define L2_LEN 10
+#define L1 "Welcome to"
+#define L2 "ETALVIS"
+#define L1_LEN 10
+#define L2_LEN 7
 
 void write_substring(char *str, int start)
 {
@@ -25,15 +25,11 @@ void write_substring(char *str, int start)
 void setup()
 {
     int p1, p2;
-
     init_port();
     init_lcd();
 
     while (1)
     {
-        /* Line1: RIGHT → LEFT
-           Line2: LEFT → RIGHT */
-
         for (p1 = LCD_WIDTH, p2 = -L2_LEN;
              p1 >= -L1_LEN || p2 <= LCD_WIDTH;
              p1--, p2++)
@@ -41,7 +37,6 @@ void setup()
             outdata(0x01);
             lcd_control_write();
 
-            /* -------- LINE 1 : RIGHT → LEFT -------- */
             if (p1 >= 0)
             {
                 outdata(0x80 + p1);
@@ -55,7 +50,6 @@ void setup()
                 write_substring(L1, -p1);
             }
 
-            /* -------- LINE 2 : LEFT → RIGHT -------- */
             if (p2 >= 0)
             {
                 outdata(0xC0 + p2);
@@ -73,8 +67,6 @@ void setup()
         }
     }
 }
-
-/* ---------- LCD FUNCTIONS ---------- */
 
 void write_string(char *ptr)
 {
