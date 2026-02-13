@@ -90,12 +90,12 @@ ISR(TIMER2_COMPA_vect)
   volatile char *outa = (volatile char *)0x22;
   volatile char *pina = (volatile char *)0x20;   
 
-  if(((*pina & 0x04) == 0) && lastSwitch == 1)
+  if(((*pina & 0x08) == 0) && lastSwitch == 1)
   {
     mode ^= 1;  
     lastSwitch = 0;
   }
-  if((*pina & 0x04) != 0) lastSwitch = 1;
+  if((*pina & 0x08) != 0) lastSwitch = 1;
 
   count2++;
 
