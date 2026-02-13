@@ -20,19 +20,19 @@ void setup()
 
 void init_timer()
 {
-  volatile char *Timer1_TCCR1A = 0X80;
-  volatile char *Timer1_TCCR1B = 0X81;
-  volatile short *Timer1_TCNT1 = 0X84; 
+  volatile char *Timer1_TCCR1A = 0X80;    
+  volatile char *Timer1_TCCR1B = 0X81;    
+  volatile short *Timer1_TCNT1 = 0X84;    
   volatile short *Timer1_OCR1A = 0X88;
   volatile char *Timer1_TIMSK1 = 0X6F;
 
-  *Timer1_TCCR1A = 0;
-  *Timer1_TCCR1B = 0;
-  *Timer1_TCNT1 = 0;
+  *Timer1_TCCR1A = 0;       // Timer controlled register
+  *Timer1_TCCR1B = 0;       // Timer controlled register
+  *Timer1_TCNT1 = 0;        // Timer count 
 
-  *Timer1_OCR1A = 42500;   
-  *Timer1_TCCR1B = 0x0C;    
-  *Timer1_TIMSK1 = 0X02;
+  *Timer1_OCR1A = 42500;    // Output Compare Registers   
+  *Timer1_TCCR1B = 0x0C;    // CTC - Clear Time Count from starting    
+  *Timer1_TIMSK1 = 0X02;    // Timer mask 
 }
 
 void init_timer2()
@@ -43,11 +43,12 @@ void init_timer2()
   volatile char *Timer2_OCR2A  = 0xB3;
   volatile char *Timer2_TIMSK2 = 0x70;
 
-  *Timer2_TCCR2A = 0x02;    
-  *Timer2_TCCR2B = 0x07;   
-  *Timer2_TCNT2  = 0;
-  *Timer2_OCR2A  = 156;    
-  *Timer2_TIMSK2 = 0x02;
+  *Timer2_TCCR2A = 0x02;    // Timer controlled register    
+  *Timer2_TCCR2B = 0x07;    // Timer controlled register   
+  *Timer2_TCNT2  = 0;       // Timer count
+
+  *Timer2_OCR2A  = 156;     // Output Compare Registers    
+  *Timer2_TIMSK2 = 0x02;    // Timer mask 
 }
 
 void init_port()
