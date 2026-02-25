@@ -1,1 +1,56 @@
+#include <avr/io.h>
+#include <avr/interrupt.h>
 
+void init_port();
+void init_timer();
+
+void setup() 
+{
+  volatile long i;
+  int j = 0;
+
+  init_port();
+  init_timer();
+
+  sei();                         // Global Interrupts
+
+  Serial.begin(9600);
+
+  while(1)
+  {
+    for(i = 0; i < 450000; i++);
+    Serial.println(j, DEC);
+    j++;
+  }
+}
+
+void init_timer()
+{
+  volatile char *Timer1_TCCR1A = (volatile char *)0x80;
+  volatile char *Timer1_TCCR1B = (volatile char *)0x81;
+  volatile short *Timer1_TCNT1 = (volatile short *)0x84; 
+  volatile short *Timer1_OCR1A = (volatile short *)0x88;
+  volatile char *Timer1_TIMSK1 = (volatile char *)0x6F;
+
+  *Timer1_TCCR1A = 0;        // Timer controlled register     
+  *Timer1_TCCR1B = 0;        // Timer controlled register
+  *Timer1_TCNT1  = 0;        // Timer count
+
+  *Timer1_OCR1A  = 40000;    // Compare value
+  *Timer1_TCCR1B = 0x0C;     // CTC mode
+  *Timer1_TIMSK1 = 0x02;     // Timer mask
+}
+
+void init_port()
+{
+  volatile char *dira = (volatile char *)0x21;
+  *dira = 0x01;    
+}
+
+ISR(TIMER1_COMPA_vect)
+{
+  volatile char *outa = (volatile char *)0x22;
+  *outa ^= 0x01;  
+}
+
+void loop() {}
